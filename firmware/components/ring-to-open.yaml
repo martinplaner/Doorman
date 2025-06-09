@@ -63,21 +63,21 @@ binary_sensor:
   #                 type: open_door
   #                 address: !lambda "return id(second_door_station_id).state;"
 
-  - id: !extend function_button
-    on_press:
-      - if:
-          condition:
-            - lambda: !lambda 'return id(doorman_ring_to_open_toggle_trigger).state != "Function Button";'
-          then:
-            - switch.toggle: doorman_ring_to_open
-            - delay: 300ms
-            - if:
-                condition:
-                  - switch.is_on: doorman_ring_to_open
-                  - switch.is_on: doorman_ring_to_open_confirmation
-                then:
-                  - tc_bus.send:
-                      type: floor_call
+  # - id: !extend function_button
+  #   on_press:
+  #     - if:
+  #         condition:
+  #           - lambda: !lambda 'return id(doorman_ring_to_open_toggle_trigger).state != "Function Button";'
+  #         then:
+  #           - switch.toggle: doorman_ring_to_open
+  #           - delay: 300ms
+  #           - if:
+  #               condition:
+  #                 - switch.is_on: doorman_ring_to_open
+  #                 - switch.is_on: doorman_ring_to_open_confirmation
+  #               then:
+  #                 - tc_bus.send:
+  #                     type: floor_call
 
 number:
   - platform: template
