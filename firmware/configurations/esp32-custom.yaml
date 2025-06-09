@@ -1,10 +1,13 @@
 substitutions:
   name: "doorman"
   friendly_name: "Doorman"
-  # --- TBD ---
   led_pin: "GPIO1"
-  external_button_pin: "GPIO20"
+  # external_button_pin: "GPIO20"
   log_level: "INFO"
+
+tc_bus:
+  rx_pin: "GPIO2"
+  tx_pin: "GPIO4"
 
 esphome:
   name: ${name}
@@ -13,10 +16,8 @@ esphome:
 
 esp32:
   board: esp32dev
-  # cpu_frequency: 80MHZ
   framework:
     type: esp-idf
-  #   version: recommended
 
 wifi:
   networks:
@@ -30,11 +31,6 @@ wifi:
 ota:
   platform: esphome
   password: !secret ota_password
-
-# Config TBD?
-tc_bus:
-  rx_pin: 22
-  tx_pin: 23
 
 packages:
   base: !include ../base.yaml

@@ -94,8 +94,8 @@ number:
     unit_of_measurement: seconds
     entity_category: CONFIG
     disabled_by_default: true
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
 switch:
   - platform: template
@@ -112,8 +112,8 @@ switch:
     #   - script.execute: update_led
     # on_turn_off:
     #   - script.execute: update_led
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
   - platform: template
     id: doorman_ring_to_open_confirmation
@@ -123,8 +123,8 @@ switch:
     optimistic: true
     entity_category: CONFIG
     disabled_by_default: true
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
   - platform: template
     id: doorman_ring_to_open_led_status
@@ -134,8 +134,8 @@ switch:
     optimistic: true
     entity_category: CONFIG
     disabled_by_default: true
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
 select:
   - platform: template
@@ -160,8 +160,8 @@ select:
       - 60 minutes
     initial_option: Never
     entity_category: CONFIG
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
   - platform: template
     id: doorman_ring_to_open_door_trigger
@@ -174,8 +174,8 @@ select:
       - Any
     initial_option: Any
     entity_category: CONFIG
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
   - platform: template
     id: doorman_ring_to_open_toggle_trigger
@@ -189,8 +189,8 @@ select:
     restore_value: true
     entity_category: CONFIG
     disabled_by_default: true
-    web_server:
-      sorting_group_id: sorting_group_doorman_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_doorman_settings
 
 script:
   - id: ring_to_open_timer

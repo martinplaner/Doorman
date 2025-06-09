@@ -49,8 +49,8 @@ select:
       icon: "mdi:doorbell-video"
       entity_category: CONFIG
       disabled_by_default: true
-      web_server:
-        sorting_group_id: sorting_group_intercom_settings
+      # web_server:
+      #   sorting_group_id: sorting_group_intercom_settings
 
     # ringtone_entrance_door_call:
     #   id: intercom_ringtone_entrance_door_call
@@ -127,8 +127,8 @@ button:
       - tc_bus.read_memory:
     entity_category: CONFIG
     disabled_by_default: true
-    web_server:
-      sorting_group_id: sorting_group_intercom_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_intercom_settings
 
   - platform: template
     id: identify_indoor_station
@@ -138,5 +138,5 @@ button:
     disabled_by_default: true
     on_press:
       - tc_bus.identify:
-    web_server:
-      sorting_group_id: sorting_group_intercom_settings
+    # web_server:
+    #   sorting_group_id: sorting_group_intercom_settings
