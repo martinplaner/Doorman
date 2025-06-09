@@ -1,0 +1,32 @@
+substitutions:
+  name: "doorman"
+  friendly_name: "Doorman"
+  # --- TBD ---
+  led_pin: "GPIO1"
+  external_button_pin: "GPIO20"
+  log_level: "DEBUG"
+
+logger:
+  level: DEBUG
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: false
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid
+      password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    password: !secret fallback_ap_password
+
+web_server:
+  version: 3
