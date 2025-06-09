@@ -1,18 +1,18 @@
-# Configurable Options
-substitutions:
-  name: "doorman-s3"
-  friendly_name: "Doorman S3"
-  log_level: "INFO"
+# # Configurable Options
+# substitutions:
+#   name: "doorman-s3"
+#   friendly_name: "Doorman S3"
+#   log_level: "INFO"
 
-# Essential ESPHome Configuration Options
-esphome:
-  name: ${name}
-  friendly_name: ${friendly_name}
-  name_add_mac_suffix: false
-  min_version: "2025.2.0"
-  project:
-    name: "AzonInc.Doorman"
-    version: "2025.3.0"
+# # Essential ESPHome Configuration Options
+# esphome:
+#   name: ${name}
+#   friendly_name: ${friendly_name}
+#   name_add_mac_suffix: false
+#   min_version: "2025.2.0"
+#   project:
+#     name: "AzonInc.Doorman"
+#     version: "2025.3.0"
 
 # Enable logging
 # Prevent component warning spam
@@ -20,7 +20,7 @@ logger:
   level: ${log_level}
   logs:
     component: ERROR # avoids component warning spam
-    sensor: WARN  # avoids logging debug sensor updates
+    sensor: WARN # avoids logging debug sensor updates
 
 web_server:
   version: 3
@@ -53,27 +53,29 @@ web_server:
       name: "Diagnostic"
       sorting_weight: -1
 
-wifi:
-  ap:
-    ssid: "${friendly_name} Setup"
-    password: "open-sesame"
+# wifi:
+#   ap:
+#     ssid: "${friendly_name} Setup"
+#     password: "open-sesame"
 
 captive_portal:
 
-# Improv for easy provisioning
-improv_serial:
+# # Improv for easy provisioning
+# improv_serial:
 
 # Import TC:BUS Component
 external_components:
-  - source: github://azoninc/doorman@${branch}
-    components: [ tc_bus ]
-    refresh: 60s
+  # - source: github://azoninc/doorman@${branch}
+  #   components: [tc_bus]
+  #   refresh: 60s
+  - source: ../../components
+    components: [tc_bus]
 
 # Setup TC:BUS Component
 tc_bus:
   id: tc_bus_intercom
   event: "doorman"
-  
+
 number:
   - platform: tc_bus
     serial_number:
@@ -88,10 +90,10 @@ number:
   - platform: template
     id: entrance_door_station_id
     name: "Entrance Door Station ID"
-    mode : box
+    mode: box
     icon: "mdi:counter"
     restore_value: true
-    initial_value: '0'
+    initial_value: "0"
     max_value: 63
     min_value: 0
     step: 1
@@ -102,22 +104,22 @@ number:
       sorting_group_id: sorting_group_intercom_settings
       sorting_weight: -20
 
-  - platform: template
-    id: second_door_station_id
-    name: "Second Door Station ID"
-    mode : box
-    icon: "mdi:counter"
-    restore_value: true
-    initial_value: '63'
-    max_value: 63
-    min_value: 0
-    step: 1
-    optimistic: true
-    disabled_by_default: true
-    entity_category: CONFIG
-    web_server:
-      sorting_group_id: sorting_group_intercom_settings
-      sorting_weight: -20
+  # - platform: template
+  #   id: second_door_station_id
+  #   name: "Second Door Station ID"
+  #   mode: box
+  #   icon: "mdi:counter"
+  #   restore_value: true
+  #   initial_value: "63"
+  #   max_value: 63
+  #   min_value: 0
+  #   step: 1
+  #   optimistic: true
+  #   disabled_by_default: true
+  #   entity_category: CONFIG
+  #   web_server:
+  #     sorting_group_id: sorting_group_intercom_settings
+  #     sorting_weight: -20
 
 text_sensor:
   - platform: tc_bus
@@ -137,29 +139,29 @@ text_sensor:
         sorting_group_id: sorting_group_listeners
         sorting_weight: -99
 
-  - platform: template
-    id: doorman_firmware_version
-    name: "Firmware"
-    icon: mdi:new-box
-    lambda: |-
-      return to_string(ESPHOME_PROJECT_VERSION);
-    entity_category: DIAGNOSTIC
-    web_server:
-      sorting_group_id: sorting_group_diagnostic
-      sorting_weight: -20
+  # - platform: template
+  #   id: doorman_firmware_version
+  #   name: "Firmware"
+  #   icon: mdi:new-box
+  #   lambda: |-
+  #     return to_string(ESPHOME_PROJECT_VERSION);
+  #   entity_category: DIAGNOSTIC
+  #   web_server:
+  #     sorting_group_id: sorting_group_diagnostic
+  #     sorting_weight: -20
 
-switch:
-  # Preconfigured Relay Switch
-  - platform: gpio
-    name: Relay
-    icon: mdi:electric-switch
-    id: doorman_relay
-    restore_mode: RESTORE_DEFAULT_OFF
-    disabled_by_default: true
-    pin: ${relay_pin}
-    web_server:
-      sorting_group_id: sorting_group_controls
-      sorting_weight: -7
+# switch:
+#   # Preconfigured Relay Switch
+#   - platform: gpio
+#     name: Relay
+#     icon: mdi:electric-switch
+#     id: doorman_relay
+#     restore_mode: RESTORE_DEFAULT_OFF
+#     disabled_by_default: true
+#     pin: ${relay_pin}
+#     web_server:
+#       sorting_group_id: sorting_group_controls
+#       sorting_weight: -7
 
 button:
   # System Actions
@@ -194,18 +196,18 @@ button:
     web_server:
       sorting_group_id: sorting_group_controls
       sorting_weight: -10
-          
-  - platform: template
-    id: open_second_door
-    name: "Open Second Entrance Door"
-    icon: mdi:door
-    on_press:
-      - tc_bus.send:
-          type: open_door
-          address: !lambda "return id(second_door_station_id).state;"
-    web_server:
-      sorting_group_id: sorting_group_controls
-      sorting_weight: -9
+
+  # - platform: template
+  #   id: open_second_door
+  #   name: "Open Second Entrance Door"
+  #   icon: mdi:door
+  #   on_press:
+  #     - tc_bus.send:
+  #         type: open_door
+  #         address: !lambda "return id(second_door_station_id).state;"
+  #   web_server:
+  #     sorting_group_id: sorting_group_controls
+  #     sorting_weight: -9
 
   - platform: template
     id: turn_on_light
@@ -270,15 +272,15 @@ binary_sensor:
       sorting_group_id: sorting_group_listeners
       sorting_weight: -28
 
-  - platform: tc_bus
-    id: second_entrance_doorbell
-    name: "Second Entrance Doorbell"
-    type: door_call
-    address_lambda: !lambda "return id(second_door_station_id).state;"
-    auto_off: 0.2s
-    web_server:
-      sorting_group_id: sorting_group_listeners
-      sorting_weight: -27
+  # - platform: tc_bus
+  #   id: second_entrance_doorbell
+  #   name: "Second Entrance Doorbell"
+  #   type: door_call
+  #   address_lambda: !lambda "return id(second_door_station_id).state;"
+  #   auto_off: 0.2s
+  #   web_server:
+  #     sorting_group_id: sorting_group_listeners
+  #     sorting_weight: -27
 
   - platform: tc_bus
     id: apartment_doorbell
@@ -379,8 +381,8 @@ script:
   - id: update_led
     then:
       - logger.log: "Conditionally set LED State"
-      - light.turn_off:
-          id: doorman_rgb_status_led
-          transition_length: 1s
+      # - light.turn_off:
+      #     id: doorman_rgb_status_led
+      #     transition_length: 1s
       # TODO: Restore specific state conditionally
       # Extended by addons

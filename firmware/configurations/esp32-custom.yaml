@@ -1,0 +1,44 @@
+substitutions:
+  name: "doorman"
+  friendly_name: "Doorman"
+  # --- TBD ---
+  led_pin: "GPIO1"
+  external_button_pin: "GPIO20"
+  log_level: "INFO"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: false
+
+esp32:
+  board: esp32dev
+  # cpu_frequency: 80MHZ
+  framework:
+    type: esp-idf
+  #   version: recommended
+
+wifi:
+  networks:
+    - ssid: !secret wifi_ssid
+      password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    password: !secret fallback_ap_password
+
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+# Config TBD?
+tc_bus:
+  rx_pin: 22
+  tx_pin: 23
+
+packages:
+  base: !include ../base.yaml
+  api: !include ../components/api-homeassistant.yaml
+  pattern_events: !include ../components/pattern-events.yaml
+  ring_to_open: !include ../components/ring-to-open.yaml
+  intercom_settings: !include ../components/intercom-settings.yaml
