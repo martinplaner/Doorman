@@ -1,13 +1,13 @@
 substitutions:
   name: "doorman"
   friendly_name: "Doorman"
-  led_pin: "GPIO1"
+  led_pin: "GPIO8"
   # external_button_pin: "GPIO20"
   log_level: "INFO"
 
 tc_bus:
-  rx_pin: "GPIO2"
-  tx_pin: "GPIO4"
+  rx_pin: "GPIO0"
+  tx_pin: "GPIO1"
 
 esphome:
   name: ${name}
@@ -15,7 +15,7 @@ esphome:
   name_add_mac_suffix: false
 
 esp32:
-  board: esp32dev
+  board: esp32-c6-devkitm-1
   framework:
     type: esp-idf
 

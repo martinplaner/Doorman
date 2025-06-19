@@ -222,19 +222,19 @@ button:
   #     sorting_weight: -8
 
 # Onboard Status LEDs
-light:
-  - platform: status_led
-    id: doorman_status_led
-    name: Status LED
-    icon: "mdi:led-on"
-    pin:
-      number: ${led_pin}
-      inverted: true
-    restore_mode: RESTORE_DEFAULT_ON
-    entity_category: CONFIG
-    # web_server:
-    #   sorting_group_id: sorting_group_system
-    #   sorting_weight: -9
+# light:
+#   - platform: status_led
+#     id: doorman_status_led
+#     name: Status LED
+#     icon: "mdi:led-on"
+#     pin:
+#       number: ${led_pin}
+#       inverted: true
+#     restore_mode: RESTORE_DEFAULT_ON
+#     entity_category: CONFIG
+#     # web_server:
+#     #   sorting_group_id: sorting_group_system
+#     #   sorting_weight: -9
 
 sensor:
   - platform: uptime
